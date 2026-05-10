@@ -16,7 +16,7 @@ config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
-
+UIManager="*res://src/ui_manager.gd"
 RechoEvents="*res://src/recho_events.gd"
 Inventory="*res://src/inventory/inventory.gd"
 QuestManager="*res://src/quest/quest_manager.gd"
