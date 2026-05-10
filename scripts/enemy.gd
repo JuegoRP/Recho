@@ -38,6 +38,7 @@ func _physics_process(delta) -> void:
 
 func trigger_pulse() -> void:
 	time_since_last_pulse = 0.0
+	AudioManager.play_sfx("res://audio/sfx/disonant_voice.mp3")
 	# Visual feedback for the pulse
 	var tween = create_tween()
 	tween.tween_property(animated_sprite_2d, "scale", Vector2(1.2, 1.2), 0.1)

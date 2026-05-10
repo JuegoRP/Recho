@@ -15,6 +15,9 @@ func _ready() -> void:
 		label.text = "[E] " + npc_name
 		label.visible = false
 
+func play_voice() -> void:
+	AudioManager.play_sfx("res://audio/sfx/elder_voice.mp3")
+
 func _process(_delta: float) -> void:
 	if player_nearby and Input.is_action_just_pressed("interact"):
 		start_dialogue()

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="RECHO"
-run/main_scene="res://scenes/arenas/arena_hub.tscn"
+run/main_scene="res://scenes/main_menu.tscn"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -23,6 +23,7 @@ QuestManager="*res://src/quest/quest_manager.gd"
 FactionManager="*res://src/combat/faction_manager.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 GameManager="*res://scripts/game_manager.gd"
+AudioManager="*res://src/audio_manager.gd"
 
 [display]
 

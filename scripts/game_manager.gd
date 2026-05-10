@@ -16,6 +16,11 @@ func _ready() -> void:
 	add_to_group("game_manager")
 	call_deferred("find_player")
 	RechoEvents.player_died.connect(_on_player_died)
+	
+	# Connect to Dialogue Manager
+	var dm = get_node_or_null("/root/DialogueManager")
+	if dm:
+		dm.dialogue_ended.connect(func(_resource): RechoEvents.dialogue_ended.emit())
 
 func find_player() -> void:
 	await get_tree().process_frame
