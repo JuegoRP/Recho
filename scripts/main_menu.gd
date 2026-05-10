@@ -5,8 +5,12 @@ func _ready() -> void:
 	pass
 
 func _on_start_pressed() -> void:
-	# Transition to the Hub
-	get_tree().change_scene_to_file("res://scenes/arenas/arena_hub.tscn")
+	# Explicitly using the verified path in scenes/arenas/
+	var hub_path = "res://scenes/arenas/arena_hub.tscn"
+	if FileAccess.file_exists(hub_path):
+		get_tree().change_scene_to_file(hub_path)
+	else:
+		push_error("Could not find arena_hub.tscn at: " + hub_path)
 
 func _on_exit_pressed() -> void:
 	get_tree().quit()
