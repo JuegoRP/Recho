@@ -1,0 +1,42 @@
+~ start
+
+Elder: Konečně jsi přišel. Dlouho jsem čekal.
+Elder: Svět se mění. Cítíš to?
+
+- Ano, cítím.
+	=> felt_it
+- Ne, nevím o čem mluvíš.
+	=> doesnt_know
+
+~ felt_it
+Elder: Dobrý. To znamená že jsi připraven.
+Elder: Tři frakce bojují o budoucnost tohoto světa. Každá má svou pravdu.
+=> offer_quest
+
+~ doesnt_know
+Elder: Brzy budeš. Svět tě naučí.
+Elder: Tři síly jsou v rovnováze. Zatím.
+=> offer_quest
+
+~ offer_quest
+Elder: Chceš vědět více?
+
+- Řekni mi o Architektech.
+	Elder: Věří v řád a strukturu. Svět zachrání systémem.
+	Elder: Jsou silní. Ale rigidní.
+	=> start
+- Řekni mi o Rezonátorech.
+	Elder: Věří v emoce a spojení. Hudba je jejich zbraň.
+	Elder: Jsou živí. Ale chaotičtí.
+	=> start
+- Řekni mi o Tichých.
+	Elder: O nich nemluv nahlas.
+	Elder: Věří že svět nelze zachránit. Jen přijmout.
+	Elder: Jsou nebezpeční. Protože možná mají pravdu.
+	=> start
+- Dost. Jdu sám.
+	Elder: Jak chceš. Svět tě najde.
+	=> end
+
+~ end
+Elder: Buď opatrný.

@@ -1,0 +1,47 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/hud.gd" id="1_hud"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_hud")
+
+[node name="HUD" type="VBoxContainer" parent="."]
+anchors_preset = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 300.0
+offset_bottom = 100.0
+theme_override_constants/separation = 6
+
+[node name="LevelLabel" type="Label" parent="HUD"]
+text = "Level 1"
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(1, 0.85, 0.3, 1)
+
+[node name="HPBar" type="ProgressBar" parent="HUD"]
+custom_minimum_size = Vector2(220, 20)
+max_value = 100.0
+value = 100.0
+show_percentage = false
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+
+[node name="HPLabel" type="Label" parent="HUD"]
+text = "❤ HP"
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(1, 0.4, 0.4, 1)
+
+[node name="XPBar" type="ProgressBar" parent="HUD"]
+custom_minimum_size = Vector2(220, 14)
+max_value = 20.0
+value = 0.0
+show_percentage = false
+
+[node name="XPLabel" type="Label" parent="HUD"]
+text = "✦ XP"
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.5, 0.8, 1, 1)
+
+[node name="GoldLabel" type="Label" parent="HUD"]
+text = "Gold: 0"
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(1, 0.85, 0.1, 1)

@@ -1,0 +1,91 @@
+# INSTRUKCE - Co udělat v Godot editoru
+# Po nakopírování .gd souborů do scripts/ složky
+
+## KROK 1 - Přidej GameManager jako Autoload
+1. Horní menu → Project → Project Settings
+2. Záložka "Autoload"
+3. Klikni na ikonu složky vedle "Path"
+4. Vyber: res://scripts/game_manager.gd
+5. Do pole "Node Name" napiš: GameManager
+6. Klikni "Add"
+7. Zaškrtni "Enable" ✓
+8. Zavři okno
+
+## KROK 2 - Přidej HUD do World scény
+1. Otevři scenes/world.tscn (dvojklik v FileSystem)
+2. V Scene panelu (vlevo nahoře) klikni na "World" node
+3. Klikni + (Add Child Node)
+4. Hledej "CanvasLayer" → Add
+5. Přejmenuj ho na "HUD" (F2)
+6. V Inspectoru (vpravo) klikni na "Script" → Load
+7. Vyber: res://scripts/hud.gd
+
+## KROK 3 - Přidej VBoxContainer do HUD
+1. Klikni na HUD node
+2. Přidej child node: VBoxContainer
+3. Přejmenuj na "HUD" (musí se jmenovat přesně "HUD")
+4. V Inspectoru nastav:
+   - Anchor Preset: Top Left
+   - Offset Left: 10
+   - Offset Top: 10
+   - Offset Right: 300
+   - Offset Bottom: 200
+
+## KROK 4 - Přidej UI prvky do VBoxContainer (HUD)
+Přidej tyto child nody do VBoxContainer v tomto pořadí:
+
+A) Label → přejmenuj na "LevelLabel"
+   - Text: "Level 1"
+   - Font Size: 18
+
+B) ProgressBar → přejmenuj na "HPBar"
+   - Min Value: 0
+   - Max Value: 100
+   - Value: 100
+   - Custom Minimum Size: x=220, y=22
+
+C) Label → přejmenuj na "HPLabel"
+   - Text: "❤ HP"
+
+D) ProgressBar → přejmenuj na "XPBar"  
+   - Min Value: 0
+   - Max Value: 20
+   - Value: 0
+   - Custom Minimum Size: x=220, y=14
+
+E) Label → přejmenuj na "XPLabel"
+   - Text: "✦ XP"
+
+F) Label → přejmenuj na "GoldLabel"
+   - Text: "Gold: 0"
+
+## KROK 5 - Přidej UpgradeUI do World scény
+1. Klikni na "World" node (root)
+2. Přidej child node: CanvasLayer
+3. Přejmenuj na "UpgradeUI"
+4. Přiřaď script: res://scripts/upgrade_ui.gd
+5. Do UpgradeUI přidej child: Panel
+   - Anchor Preset: Center
+   - Offset Left: -320, Top: -180, Right: 320, Bottom: 180
+6. Do Panel přidej child: Label → přejmenuj "TitleLabel"
+   - Text: "LEVEL UP!"
+   - Horizontal Align: Center
+7. Do Panel přidej child: HBoxContainer → přejmenuj "CardsContainer"
+   - Anchor Preset: Center
+
+## KROK 6 - Přidej hráče do group
+1. Otevři scenes/player.tscn
+2. Klikni na root node (CharacterBody2D)
+3. V Inspectoru najdi "Groups" sekci (nebo Node záložka → Groups)
+4. Přidej group: "player_group"
+5. Ulož (Ctrl+S)
+
+## KROK 7 - Přidej nepřátele do group
+1. Otevři scenes/enemy.tscn
+2. Klikni na root node
+3. Přidej group: "enemy_group"
+4. Ulož
+
+## KROK 8 - Test
+Zmáčkni F5. Měl by se zobrazit HUD s HP/XP/Gold bary.
+Zabij kostlivce → získáš XP → po 20 XP se hra pauzne a zobrazí 3 upgrade karty.
