@@ -10,14 +10,14 @@ config_version=5
 
 [application]
 
-config/name="Paleta"
-run/main_scene="res://scenes/world.tscn"
+config/name="RECHO"
+run/main_scene="res://scenes/arenas/arena_hub.tscn"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
-PaletaEvents="*res://src/paleta_events.gd"
+RechoEvents="*res://src/recho_events.gd"
 Inventory="*res://src/inventory/inventory.gd"
 QuestManager="*res://src/quest/quest_manager.gd"
 FactionManager="*res://src/combat/faction_manager.gd"

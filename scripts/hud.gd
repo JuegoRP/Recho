@@ -12,14 +12,14 @@ func connect_signals() -> void:
 		_on_hp_changed(player.hp, player.max_hp)
 		_on_xp_changed(player.xp, player.xp_to_next_level)
 	
-	# Resonance ze systému
+	# Resonance from system
 	if Inventory:
 		Inventory.resonance_changed.connect(_on_resonance_changed)
 		_on_resonance_changed(Inventory.resonance)
 	
-	if PaletaEvents:
-		PaletaEvents.quest_started.connect(_on_quest_started)
-		PaletaEvents.quest_completed.connect(_on_quest_completed)
+	if RechoEvents:
+		RechoEvents.quest_started.connect(_on_quest_started)
+		RechoEvents.quest_completed.connect(_on_quest_completed)
 
 func _find(name: String) -> Node:
 	return get_tree().root.find_child(name, true, false)

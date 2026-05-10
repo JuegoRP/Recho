@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var npc_name: String = "Starší"
+@export var npc_name: String = "Elder"
 @export var dialogue_file: String = "res://dialogue/elder_npc.dialogue"
 @export var dialogue_start: String = "start"
 
@@ -21,15 +21,15 @@ func _process(_delta: float) -> void:
 
 func start_dialogue() -> void:
 	if not ResourceLoader.exists(dialogue_file):
-		push_warning("Dialogue soubor nenalezen: " + dialogue_file)
+		push_warning("Dialogue file not found: " + dialogue_file)
 		return
 	var dm = get_node_or_null("/root/DialogueManager")
 	if dm == null:
-		push_warning("DialogueManager není načten")
+		push_warning("DialogueManager not loaded")
 		return
 	var resource = load(dialogue_file)
 	dm.show_dialogue_balloon(resource, dialogue_start)
-	PaletaEvents.dialogue_started.emit(npc_name)
+	RechoEvents.dialogue_started.emit(npc_name)
 
 func _on_interaction_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player_group"):

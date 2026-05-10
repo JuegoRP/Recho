@@ -2,26 +2,40 @@ extends Node
 
 var player: Node = null
 
+# Resonance Integrity (as per GDD)
+var resonance_integrity: float = 1.0 # 1.0 = 100%
+var total_deaths: int = 0
+
 var all_upgrades = [
-	{"id": "speed", "name": "Rychlé nohy", "desc": "Pohyb +30", "icon": "⚡", "faction": "none"},
-	{"id": "max_hp", "name": "Železné srdce", "desc": "Max HP +25", "icon": "❤", "faction": "none"},
-	{"id": "attack_range", "name": "Dlouhé paže", "desc": "Dosah útoku +20", "icon": "⚔", "faction": "none"},
-	{"id": "architect_style", "name": "Architektonická síla", "desc": "Pomalý ale těžký útok", "icon": "⬡", "faction": "architects"},
-	{"id": "resonator_rhythm", "name": "Rytmus Rezonátoru", "desc": "Rychlé combo útoky", "icon": "♪", "faction": "resonators"},
-	{"id": "silent_patience", "name": "Tiché čekání", "desc": "Nepřátelé zpomalí o 30%", "icon": "◌", "faction": "silent"},
+	{"id": "glass_stabilizer", "name": "Glass Stabilizer", "desc": "Ascence fragment: +Damage, -Cooldown", "icon": "⬡", "faction": "ascence"},
+	{"id": "glitch_trigger", "name": "Glitch Trigger", "desc": "Entropy fragment: ++Damage, --HP", "icon": "♪", "faction": "entropy"},
+	{"id": "harmonic_core", "name": "Harmonic Core", "desc": "Symphony fragment: +Speed, +Range", "icon": "✦", "faction": "symphony"},
 ]
 
 func _ready() -> void:
 	add_to_group("game_manager")
 	call_deferred("find_player")
+	RechoEvents.player_died.connect(_on_player_died)
 
 func find_player() -> void:
 	await get_tree().process_frame
 	player = get_tree().get_first_node_in_group("player_group")
 	if player:
 		player.connect("level_up", _on_player_level_up)
-		# Spusť intro quest
+		# Start intro quest
 		QuestManager.start_quest("intro_awaken")
+
+func _on_player_died() -> void:
+	total_deaths += 1
+	resonance_integrity -= 0.1 # Every death costs 10% integrity
+	resonance_integrity = clamp(resonance_integrity, 0.0, 1.0)
+	
+	print("Player died. Total deaths: ", total_deaths, " Integrity: ", resonance_integrity)
+	
+	if resonance_integrity <= 0.6:
+		print("Tuner is starting to glitch...")
+	if resonance_integrity <= 0.2:
+		print("Tuner is cracked.")
 
 func _on_player_level_up(new_level: int) -> void:
 	get_tree().paused = true
@@ -31,26 +45,15 @@ func _on_player_level_up(new_level: int) -> void:
 		upgrade_ui.show_upgrades(get_random_upgrades(3))
 
 func get_random_upgrades(count: int) -> Array:
-	var shuffled = all_upgrades.duplicate()
-	shuffled.shuffle()
-	return shuffled.slice(0, min(count, shuffled.size()))
+	var upgrades = all_upgrades.duplicate()
+	upgrades.shuffle()
+	return upgrades.slice(0, min(count, upgrades.size()))
 
 func apply_upgrade(upgrade_id: String) -> void:
-	if player == null:
-		player = get_tree().get_first_node_in_group("player_group")
-	match upgrade_id:
-		"speed":
-			if player: player.upgrade_speed(30.0)
-		"max_hp":
-			if player: player.upgrade_max_hp(25)
-		"attack_range":
-			if player: player.attack_range += 20.0
-		"architect_style":
-			if player: player.attack_style = 0
-		"resonator_rhythm":
-			if player: player.attack_style = 1
-		"silent_patience":
-			# Zpomal všechny nepřátele
-			for enemy in get_tree().get_nodes_in_group("enemy_group"):
-				enemy.base_movement_speed *= 0.7
+	# In the new Socket system, applying an upgrade means finding an empty socket
+	for i in range(Inventory.sockets.size()):
+		if Inventory.sockets[i] == "":
+			Inventory.socket_fragment(upgrade_id, i)
+			break
+	
 	get_tree().paused = false

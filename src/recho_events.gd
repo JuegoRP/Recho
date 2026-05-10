@@ -1,7 +1,7 @@
-## Globální event bus - spojuje vzdálené scény bez přímých referencí
+## Global event bus - connects distant scenes without direct references
 extends Node
 
-# --- HRÁČ ---
+# --- PLAYER ---
 signal player_died
 signal player_healed(amount: int)
 signal player_damaged(amount: int)
@@ -10,6 +10,7 @@ signal player_damaged(amount: int)
 signal combat_started(enemy_data: Dictionary)
 signal combat_ended(victory: bool)
 signal entity_killed(entity_name: String)
+signal perfect_hit_performed(at_position: Vector2)
 
 # --- QUEST ---
 signal quest_started(quest_id: String)
@@ -20,9 +21,9 @@ signal quest_completed(quest_id: String)
 signal dialogue_started(npc_name: String)
 signal dialogue_ended
 
-# --- SVĚT ---
+# --- WORLD ---
 signal area_changed(area_name: String)
 signal resonance_changed(amount: int)
 
-# --- FRAKCE ---
+# --- FACTIONS ---
 signal faction_reputation_changed(faction: String, amount: int)

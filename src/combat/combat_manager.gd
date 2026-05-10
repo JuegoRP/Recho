@@ -1,5 +1,5 @@
-## Combat Manager pro Paletu
-## Real-time boj s mechanikou tří stylů (Architect, Resonator, Silent)
+## Combat Manager for RECHO
+## Real-time combat with three style mechanics (Architect, Resonator, Silent)
 extends Node
 
 signal combat_started
@@ -12,27 +12,27 @@ enum AttackStyle { ARCHITECT, RESONATOR, SILENT }
 var current_style: AttackStyle = AttackStyle.RESONATOR
 var combo_count: int = 0
 var last_attack_time: float = 0.0
-var rhythm_window: float = 0.6  # sekundy pro Resonator rytmus
+var rhythm_window: float = 0.6  # seconds for Resonator rhythm
 
-# Statistiky útoku podle stylu
+# Attack statistics by style
 const STYLE_DATA = {
 	AttackStyle.ARCHITECT: {
-		"name": "Architektonický",
+		"name": "Architectural",
 		"base_damage": 20,
 		"cooldown": 1.2,
-		"special": "barrier"   # vytvoří bariéru
+		"special": "barrier"   # creates a barrier
 	},
 	AttackStyle.RESONATOR: {
-		"name": "Rezonační",
+		"name": "Resonant",
 		"base_damage": 12,
 		"cooldown": 0.5,
-		"special": "rhythm"    # násobič při rytmu
+		"special": "rhythm"    # multiplier during rhythm
 	},
 	AttackStyle.SILENT: {
-		"name": "Tichý",
+		"name": "Silent",
 		"base_damage": 0,
 		"cooldown": 0.0,
-		"special": "patience"  # entita se ničí sama
+		"special": "patience"  # entity destroys itself
 	}
 }
 
@@ -45,7 +45,7 @@ func calculate_damage() -> int:
 	
 	match current_style:
 		AttackStyle.RESONATOR:
-			# Rytmický bonus
+			# Rhythmic bonus
 			var time_since_last = Time.get_ticks_msec() / 1000.0 - last_attack_time
 			if time_since_last <= rhythm_window and combo_count > 0:
 				combo_count += 1

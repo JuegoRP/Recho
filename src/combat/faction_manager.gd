@@ -1,4 +1,4 @@
-## Faction Manager - spravuje reputaci u tří frakcí
+## Faction Manager - manages reputation for three factions
 extends Node
 
 signal reputation_changed(faction: String, value: int)
@@ -6,14 +6,14 @@ signal faction_unlocked(faction: String)
 
 enum Faction { ARCHITECTS, RESONATORS, SILENT }
 
-# Reputace: -100 až 100
+# Reputation: -100 to 100
 var reputation: Dictionary = {
 	"architects": 0,
 	"resonators": 0,
 	"silent": 0
 }
 
-# Co každá frakce nabízí v shopu
+# What each faction offers in the shop
 const FACTION_SHOPS = {
 	"architects": {
 		"items": ["architect_key"],
@@ -37,7 +37,7 @@ func change_reputation(faction: String, amount: int) -> void:
 		return
 	reputation[faction] = clamp(reputation[faction] + amount, -100, 100)
 	reputation_changed.emit(faction, reputation[faction])
-	PaletaEvents.faction_reputation_changed.emit(faction, reputation[faction])
+	RechoEvents.faction_reputation_changed.emit(faction, reputation[faction])
 
 func get_reputation(faction: String) -> int:
 	return reputation.get(faction, 0)
@@ -48,9 +48,9 @@ func can_access_shop(faction: String) -> bool:
 
 func get_faction_name(faction: String) -> String:
 	match faction:
-		"architects": return "Architekti"
-		"resonators": return "Rezonátoři"
-		"silent": return "Tiší"
+		"architects": return "Architects"
+		"resonators": return "Resonators"
+		"silent": return "Silent"
 	return faction
 
 func save() -> Dictionary:

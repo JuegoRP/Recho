@@ -1,47 +1,47 @@
-## Quest systém pro Paletu
-## Spravuje aktivní questy, jejich postup a odměny
+## Quest system for RECHO
+## Manages active quests, their progress and rewards
 extends Node
 
 signal quest_started(quest_id: String)
 signal quest_step_completed(quest_id: String, step: int)
 signal quest_completed(quest_id: String)
 
-# Aktivní questy: { "quest_id": { "step": 0, "data": {...} } }
+# Active quests: { "quest_id": { "step": 0, "data": {...} } }
 var active_quests: Dictionary = {}
 var completed_quests: Array = []
 
-# Definice questů
+# Quest definitions
 const QUESTS = {
 	"intro_awaken": {
-		"title": "Probuzení",
+		"title": "Awakening",
 		"faction": "none",
 		"steps": [
-			{"desc": "Zjisti co se stalo.", "type": "explore", "target": "village_center"},
-			{"desc": "Promluv s prvním NPC.", "type": "talk", "target": "elder_npc"},
-			{"desc": "Vstup do prvního dungeonu.", "type": "enter", "target": "dark_forest"},
+			{"desc": "Find out what happened.", "type": "explore", "target": "village_center"},
+			{"desc": "Talk to the first NPC.", "type": "talk", "target": "elder_npc"},
+			{"desc": "Enter the first dungeon.", "type": "enter", "target": "dark_forest"},
 		],
 		"reward_resonance": 50,
 		"reward_items": ["memory_echo"]
 	},
 	"architect_trial": {
-		"title": "Zkouška Architektů",
+		"title": "Architects' Trial",
 		"faction": "architects",
 		"steps": [
-			{"desc": "Najdi Architektonický symbol.", "type": "collect", "target": "arch_symbol"},
-			{"desc": "Vytvoř vzor ze symbolů.", "type": "interact", "target": "pattern_altar"},
-			{"desc": "Poraž Strážce vzoru.", "type": "kill", "target": "pattern_guardian"},
+			{"desc": "Find the Architectural symbol.", "type": "collect", "target": "arch_symbol"},
+			{"desc": "Create a pattern from symbols.", "type": "interact", "target": "pattern_altar"},
+			{"desc": "Defeat the Pattern Guardian.", "type": "kill", "target": "pattern_guardian"},
 		],
 		"reward_resonance": 100,
 		"reward_items": ["architect_key"],
 		"reward_faction": {"architects": 20}
 	},
 	"resonator_song": {
-		"title": "Ztracená melodie",
+		"title": "Lost Melody",
 		"faction": "resonators",
 		"steps": [
-			{"desc": "Slyš ozvěnu v dungeonu.", "type": "explore", "target": "echo_chamber"},
-			{"desc": "Sbírej fragmenty melodie.", "type": "collect_multi", "target": "melody_fragment", "count": 3},
-			{"desc": "Zahraj melodii u oltáře.", "type": "interact", "target": "melody_altar"},
+			{"desc": "Hear the echo in the dungeon.", "type": "explore", "target": "echo_chamber"},
+			{"desc": "Collect melody fragments.", "type": "collect_multi", "target": "melody_fragment", "count": 3},
+			{"desc": "Play the melody at the altar.", "type": "interact", "target": "melody_altar"},
 		],
 		"reward_resonance": 100,
 		"reward_items": ["resonator_song"],
@@ -58,7 +58,7 @@ func start_quest(quest_id: String) -> bool:
 	
 	active_quests[quest_id] = {"step": 0}
 	quest_started.emit(quest_id)
-	PaletaEvents.quest_started.emit(quest_id)
+	RechoEvents.quest_started.emit(quest_id)
 	print("Quest started: ", QUESTS[quest_id]["title"])
 	return true
 
@@ -72,7 +72,7 @@ func advance_quest(quest_id: String) -> void:
 	active_quests[quest_id]["step"] = current_step
 	
 	quest_step_completed.emit(quest_id, current_step)
-	PaletaEvents.quest_updated.emit(quest_id, current_step)
+	RechoEvents.quest_updated.emit(quest_id, current_step)
 	
 	if current_step >= quest_data["steps"].size():
 		complete_quest(quest_id)
@@ -85,13 +85,13 @@ func complete_quest(quest_id: String) -> void:
 	active_quests.erase(quest_id)
 	completed_quests.append(quest_id)
 	
-	# Dej odměny
+	# Give rewards
 	Inventory.add_resonance(quest_data.get("reward_resonance", 0))
 	for item in quest_data.get("reward_items", []):
 		Inventory.add_item(item)
 	
 	quest_completed.emit(quest_id)
-	PaletaEvents.quest_completed.emit(quest_id)
+	RechoEvents.quest_completed.emit(quest_id)
 	print("Quest completed: ", quest_data["title"])
 
 func get_active_quest_step(quest_id: String) -> Dictionary:
