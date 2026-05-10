@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 ]
 
-[ext_resource type="Texture2D"  path="res://textures/Assets/Tiles.png" id="1_7rjhn"]
+[ext_resource type="Texture2D"  path="res://textures/environment/cathedral_tileset.jpg" id="1_7rjhn"]
 [ext_resource type="PackedScene"  path="res://scenes/player.tscn" id="2_61nek"]
 [ext_resource type="Script" path="res://scripts/arena.gd" id="2_arena"]
 [ext_resource type="PackedScene"  path="res://scenes/utilities/enemy_spawner.tscn" id="3_qsblq"]
