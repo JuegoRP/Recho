@@ -687,13 +687,6 @@ texture = ExtResource("1_7rjhn")
 19:24/0 = 0
 20:24/0 = 0
 
-[sub_resource type="TileSet" id="TileSet_qcjli"]
-physics_layer_0/collision_layer = 1
-physics_layer_0/collision_mask = 0
-terrain_set_0/mode = 1
-terrain_set_0/terrain_0/name = "grass"
-terrain_set_0/terrain_0/color = Color(0.0109561, 0.294673, 0.260136, 1)
-sources/0 = SubResource("TileSetAtlasSource_st5ng")
 
 [sub_resource type="Resource" id="Resource_0kfl8"]
 script = ExtResource("5_cd5bb")
