@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bjxulr6ugbxso"
+path="res://.godot/imported/creature_babling._wi_#4-1778434351368.mp3-39e91843c09802b50705461f0120ceff.mp3str"
+
+[deps]
+
+source_file="res://Recho asety/Recho hudba/creature_babling._wi_#4-1778434351368.mp3"
+dest_files=["res://.godot/imported/creature_babling._wi_#4-1778434351368.mp3-39e91843c09802b50705461f0120ceff.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

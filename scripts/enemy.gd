@@ -36,6 +36,15 @@ func _physics_process(delta) -> void:
 
 	move_to_player()
 
+func move_to_player() -> void:
+	var direction: Vector2 = global_position.direction_to(player.global_position)
+	velocity = direction * movement_speed
+	move_and_slide()
+	if direction.x < 0:
+		animated_sprite_2d.flip_h = true
+	elif direction.x > 0:
+		animated_sprite_2d.flip_h = false
+
 func trigger_pulse() -> void:
 	time_since_last_pulse = 0.0
 	AudioManager.play_sfx("res://audio/sfx/disonant_voice.mp3")
