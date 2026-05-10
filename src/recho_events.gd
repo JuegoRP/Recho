@@ -24,6 +24,7 @@ signal dialogue_ended
 # --- WORLD ---
 signal area_changed(area_name: String)
 signal resonance_changed(amount: int)
+signal game_paused(paused: bool)
 
 # --- FACTIONS ---
 signal faction_reputation_changed(faction: String, amount: int)

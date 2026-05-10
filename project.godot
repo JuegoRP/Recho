@@ -24,6 +24,7 @@ FactionManager="*res://src/combat/faction_manager.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 GameManager="*res://scripts/game_manager.gd"
 AudioManager="*res://src/audio_manager.gd"
+PauseManager="*res://scripts/pause_manager.gd"
 
 [display]
 
