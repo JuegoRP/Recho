@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 @export var npc_name: String = "Elder"
-@export var dialogue_file: String = "res://dialogue/elder_npc.dialogue"
-@export var dialogue_start: String = "start"
+@export var dialogue_file: String = "res://dialogue/elder_intro.dialogue"
+@export var dialogue_start: String = "intro_awaken"
 
 @onready var label: Label = $Label
 @onready var interaction_area: Area2D = $InteractionArea
@@ -23,22 +23,20 @@ func _process(_delta: float) -> void:
 		start_dialogue()
 
 func start_dialogue() -> void:
-	# Use absolute path and ensure it's loaded properly
+	print("NPC: start_dialogue() called.")
 	var file_path = "res://dialogue/elder_intro.dialogue"
-	if not FileAccess.file_exists(file_path):
-		push_error("Dialogue file missing at: " + file_path)
-		return
-	
 	var dm = get_node_or_null("/root/DialogueManager")
+	
 	if dm == null:
-		push_error("DialogueManager not loaded. Check Autoload settings.")
+		push_error("NPC: DialogueManager is missing! Check Autoload.")
 		return
 		
 	var resource = load(file_path)
 	if resource == null:
-		push_error("Failed to load dialogue resource from: " + file_path)
+		push_error("NPC: Failed to load dialogue: " + file_path)
 		return
 		
+	print("NPC: Dialogue balloon shown.")
 	dm.show_dialogue_balloon(resource, dialogue_start)
 	RechoEvents.dialogue_started.emit(npc_name)
 

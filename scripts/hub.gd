@@ -1,23 +1,16 @@
 extends Node2D
 
-@onready var player = $player
-@onready var elder = $NPC_Elder
+@onready var elder = get_node_or_null("NPC_Elder")
 
 func _ready() -> void:
 	AudioManager.play_music("res://audio/music/hub_ambient.mp3")
+	# Krátká prodleva na načtení všeho
+	await get_tree().create_timer(1.5).timeout
+	start_intro_dialogue()
+
+func start_intro_dialogue() -> void:
 	if elder:
-		elder.dialogue_file = "res://dialogue/elder_intro.dialogue"
-		elder.dialogue_start = "intro_awaken"
-		await get_tree().create_timer(1.0).timeout
+		print("Hub: NPC_Elder found, attempting to start dialogue...")
 		elder.start_dialogue()
-	
-	RechoEvents.dialogue_ended.connect(_on_dialogue_ended)
-
-func _on_dialogue_ended() -> void:
-	# After the first talk, maybe show a portal or just send them in
-	print("Dialogue ended. Preparing for transition...")
-	await get_tree().create_timer(1.0).timeout
-	enter_first_arena()
-
-func enter_first_arena() -> void:
-	get_tree().change_scene_to_file("res://scenes/arenas/arena_01_cathedral.tscn")
+	else:
+		push_error("Hub: NPC_Elder NOT FOUND in Hub scene! Check node name in editor.")
