@@ -35,6 +35,10 @@ window/size/window_width_override=2800
 window/size/window_height_override=1576
 window/stretch/mode="canvas_items"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
+
 [input]
 
 left={

@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_14"
+type="Resource"
+uid="uid://cd02lhj3b8v7g"
+path="res://.godot/imported/elder_intro.dialogue-96b4e68b84c41d5f2ca0e6a17db11fb1.tres"
+
+[deps]
+
+source_file="res://dialogue/elder_intro.dialogue"
+dest_files=["res://.godot/imported/elder_intro.dialogue-96b4e68b84c41d5f2ca0e6a17db11fb1.tres"]
+
+[params]
+
+defaults=true

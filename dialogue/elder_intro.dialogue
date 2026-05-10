@@ -1,28 +1,28 @@
 ~ intro_awaken
 
-do play_voice()
+do AudioManager.play_sfx("res://audio/sfx/elder_voice.mp3")
 Elder: You don't remember me. That is fine. I remember you — all versions of you. This one is the worst so far.
 The Tuner: [color=gray](Your frequency is unstable. Fear and instinct are all that remain.)[/color]
-do play_voice()
+do AudioManager.play_sfx("res://audio/sfx/elder_voice.mp3")
 Elder: Can you feel the disharmony? It is approaching. 
-do play_voice()
+do AudioManager.play_sfx("res://audio/sfx/elder_voice.mp3")
 Elder: Omitus is broken, Ladič. Fragile islands of data in a void of silence.
-do play_voice()
+do AudioManager.play_sfx("res://audio/sfx/elder_voice.mp3")
 Elder: I am sending you into the Cathedral of Silence. It is a frozen fragment of the world, trapped in the moment of its collapse.
-do play_voice()
+do AudioManager.play_sfx("res://audio/sfx/elder_voice.mp3")
 Elder: Go. Find the Resonance. Tune the world, or be recycled.
 - Who are you?
-	do play_voice()
+	do AudioManager.play_sfx("res://audio/sfx/elder_voice.mp3")
 	Elder: I am the Archive. The memory of what was. A consciousness trapped in crystal.
-	do play_voice()
+	do AudioManager.play_sfx("res://audio/sfx/elder_voice.mp3")
 	Elder: Some call me The Elder. You used to call me... something else.
 - What am I?
-	do play_voice()
+	do AudioManager.play_sfx("res://audio/sfx/elder_voice.mp3")
 	Elder: A biological shell printed from resonance dust. A fragment of a scientist's soul.
-	do play_voice()
+	do AudioManager.play_sfx("res://audio/sfx/elder_voice.mp3")
 	Elder: You are my tool. My antivirus. But antiviruses aren't supposed to have feelings.
 - I'm ready.
-	do play_voice()
+	do AudioManager.play_sfx("res://audio/sfx/elder_voice.mp3")
 	Elder: Good. Disharmony does not wait for readiness.
 
 => END

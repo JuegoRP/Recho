@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_14"
+type="Resource"
+uid="uid://cvcbgot0fki1j"
+path="res://.godot/imported/elder_npc.dialogue-fc818ff1d7068a530059076498bf7b10.tres"
+
+[deps]
+
+source_file="res://dialogue/elder_npc.dialogue"
+dest_files=["res://.godot/imported/elder_npc.dialogue-fc818ff1d7068a530059076498bf7b10.tres"]
+
+[params]
+
+defaults=true
