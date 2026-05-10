@@ -23,14 +23,22 @@ func _process(_delta: float) -> void:
 		start_dialogue()
 
 func start_dialogue() -> void:
-	if not ResourceLoader.exists(dialogue_file):
-		push_warning("Dialogue file not found: " + dialogue_file)
+	# Use absolute path and ensure it's loaded properly
+	var file_path = "res://dialogue/elder_intro.dialogue"
+	if not FileAccess.file_exists(file_path):
+		push_error("Dialogue file missing at: " + file_path)
 		return
+	
 	var dm = get_node_or_null("/root/DialogueManager")
 	if dm == null:
-		push_warning("DialogueManager not loaded")
+		push_error("DialogueManager not loaded. Check Autoload settings.")
 		return
-	var resource = load(dialogue_file)
+		
+	var resource = load(file_path)
+	if resource == null:
+		push_error("Failed to load dialogue resource from: " + file_path)
+		return
+		
 	dm.show_dialogue_balloon(resource, dialogue_start)
 	RechoEvents.dialogue_started.emit(npc_name)
 

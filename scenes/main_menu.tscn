@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://main_menu_recho"]
 
-[ext_resource type="Texture2D" uid="uid://menu_bg_id" path="res://textures/ui/menu_background.jpg" id="1_bg"]
+[ext_resource type="Texture2D"  path="res://textures/ui/menu_background.jpg" id="1_bg"]
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="2_script"]
 
 [node name="MainMenu" type="Control"]
