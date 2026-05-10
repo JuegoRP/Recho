@@ -6,7 +6,7 @@ func _ready() -> void:
 
 func _on_start_pressed() -> void:
 	# Explicitly using the verified path in scenes/arenas/
-	var hub_path = "res://scenes/arenas/arena_hub.tscn"
+	var hub_path = "res://scenes/arena_hub.tscn"
 	if FileAccess.file_exists(hub_path):
 		get_tree().change_scene_to_file(hub_path)
 	else:
